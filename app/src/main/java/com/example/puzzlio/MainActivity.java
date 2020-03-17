@@ -28,11 +28,13 @@ import android.widget.Toast;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
@@ -56,6 +58,14 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static org.opencv.imgproc.Imgproc.GaussianBlur;
+import static org.opencv.imgproc.Imgproc.MORPH_RECT;
+import static org.opencv.imgproc.Imgproc.THRESH_BINARY;
+import static org.opencv.imgproc.Imgproc.dilate;
+import static org.opencv.imgproc.Imgproc.erode;
+import static org.opencv.imgproc.Imgproc.getStructuringElement;
+import static org.opencv.imgproc.Imgproc.threshold;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -66,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
     private String DATA_PATH;
     private String mCurrentPhotoPath;
     private Mat m;
-
+    public static int thresholdMin = 85; // Threshold 80 to 105 is Ok
+    private int thresholdMax = 255; // Always 255
 
 
 
@@ -92,27 +103,30 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView test = findViewById(R.id.imageView);
 
-        Imgcodecs imgcodecs = new Imgcodecs();
-        MatOfByte matOfByte = new MatOfByte();
 
         m = new Mat();
-//        m = imgcodecs.imread(ResourcesCompat.getDrawable(getResources(), R.drawable.ocr_sample1, null).toString());
-//
-//        imgcodecs.imencode(".png", m, matOfByte);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ocr_sample1);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ocr_sample1).copy(Bitmap.Config.ARGB_8888, true);
 
-//        byte[] bytearray = matOfByte.toArray();
-//
-//        InputStream in = new ByteArrayInputStream(bytearray);
 
 
         Button button1 = findViewById(R.id.test_button);
+
+        Utils.bitmapToMat(bitmap, m);
+
+        Mat noiseless = processNoisy(m);
+        Bitmap noiselessbmp = Bitmap.createBitmap(noiseless.cols(), noiseless.rows(), Bitmap.Config.ARGB_8888);
+
+        Utils.matToBitmap(noiseless, noiselessbmp);
+
+
+
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 test.setImageBitmap(bitmap);
+                test.setImageBitmap(noiselessbmp);
             }
         });
 
@@ -271,5 +285,18 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return;
         }
+    }
+
+    private Mat processNoisy(Mat grayMat) {
+        Mat element1 = getStructuringElement(MORPH_RECT, new Size(2, 2), new Point(1, 1));
+        Mat element2 = getStructuringElement(MORPH_RECT, new Size(2, 2), new Point(1, 1));
+        dilate(grayMat, grayMat, element1);
+        erode(grayMat, grayMat, element2);
+
+        GaussianBlur(grayMat, grayMat, new Size(3, 3), 0);
+        // The thresold value will be used here
+        threshold(grayMat, grayMat, thresholdMin, thresholdMax, THRESH_BINARY);
+
+        return grayMat;
     }
 }
