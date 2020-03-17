@@ -60,11 +60,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.opencv.imgproc.Imgproc.CHAIN_APPROX_NONE;
 import static org.opencv.imgproc.Imgproc.CHAIN_APPROX_SIMPLE;
 import static org.opencv.imgproc.Imgproc.GaussianBlur;
 import static org.opencv.imgproc.Imgproc.MORPH_RECT;
+import static org.opencv.imgproc.Imgproc.RETR_CCOMP;
 import static org.opencv.imgproc.Imgproc.RETR_TREE;
 import static org.opencv.imgproc.Imgproc.THRESH_BINARY;
+import static org.opencv.imgproc.Imgproc.THRESH_OTSU;
 import static org.opencv.imgproc.Imgproc.dilate;
 import static org.opencv.imgproc.Imgproc.erode;
 import static org.opencv.imgproc.Imgproc.getStructuringElement;
@@ -112,23 +115,20 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.crosswordtest).copy(Bitmap.Config.ARGB_8888, true);
 
-
-
         Button button1 = findViewById(R.id.test_button);
 
         Utils.bitmapToMat(bitmap, m);
 
         Imgproc.cvtColor(m, m, Imgproc.COLOR_RGB2GRAY);
-//        Core.bitwise_not(m, m);
+        Core.bitwise_not(m, m);
 
         Mat noiseless = m;
 
 
-        Imgproc.Canny(noiseless, noiseless, 10, 100);
-
+        Imgproc.Canny(noiseless, noiseless, THRESH_OTSU * 0.5, THRESH_OTSU);
 
         List<MatOfPoint> contours = new ArrayList<>();
-        Imgproc.findContours(noiseless, contours, new Mat(), RETR_TREE, CHAIN_APPROX_SIMPLE);
+        Imgproc.findContours(noiseless, contours, new Mat(), RETR_TREE, CHAIN_APPROX_SIMPLE, new Point(0, 0));
 
         double largest_area =0;
         int largest_contour_index = 0;
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Imgproc.drawContours(noiseless, contours, largest_contour_index, new Scalar(0, 255, 0, 255), 3);
+        Imgproc.drawContours(noiseless, contours, largest_contour_index, new Scalar(0, 255, 0), 3);
 
         Bitmap noiselessbmp = Bitmap.createBitmap(noiseless.cols(), noiseless.rows(), Bitmap.Config.ARGB_8888);
 
@@ -316,12 +316,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Mat processNoisy(Mat grayMat) {
-        Mat element1 = getStructuringElement(MORPH_RECT, new Size(2, 2), new Point(1, 1));
-        Mat element2 = getStructuringElement(MORPH_RECT, new Size(2, 2), new Point(1, 1));
-        dilate(grayMat, grayMat, element1);
-        erode(grayMat, grayMat, element2);
+//        Mat element1 = getStructuringElement(MORPH_RECT, new Size(2, 2), new Point(1, 1));
+//        Mat element2 = getStructuringElement(MORPH_RECT, new Size(2, 2), new Point(1, 1));
+//        dilate(grayMat, grayMat, element1);
+//        erode(grayMat, grayMat, element2);
 
-        GaussianBlur(grayMat, grayMat, new Size(3, 3), 0);
+        GaussianBlur(grayMat, grayMat, new Size(5, 5), 0);
         // The thresold value will be used here
         threshold(grayMat, grayMat, thresholdMin, thresholdMax, THRESH_BINARY);
 
