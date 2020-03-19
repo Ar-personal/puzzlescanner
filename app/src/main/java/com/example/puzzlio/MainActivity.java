@@ -60,17 +60,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static android.icu.lang.UProperty.MATH;
 import static org.opencv.imgproc.Imgproc.CHAIN_APPROX_NONE;
 import static org.opencv.imgproc.Imgproc.CHAIN_APPROX_SIMPLE;
 import static org.opencv.imgproc.Imgproc.GaussianBlur;
+import static org.opencv.imgproc.Imgproc.INTER_CUBIC;
 import static org.opencv.imgproc.Imgproc.MORPH_RECT;
 import static org.opencv.imgproc.Imgproc.RETR_CCOMP;
 import static org.opencv.imgproc.Imgproc.RETR_TREE;
 import static org.opencv.imgproc.Imgproc.THRESH_BINARY;
 import static org.opencv.imgproc.Imgproc.THRESH_OTSU;
+import static org.opencv.imgproc.Imgproc.adaptiveThreshold;
 import static org.opencv.imgproc.Imgproc.dilate;
 import static org.opencv.imgproc.Imgproc.erode;
 import static org.opencv.imgproc.Imgproc.getStructuringElement;
+import static org.opencv.imgproc.Imgproc.resize;
 import static org.opencv.imgproc.Imgproc.threshold;
 
 public class MainActivity extends AppCompatActivity {
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private TessBaseAPI tessBaseAPI;
     private Uri outputFileDir;
-    private String DATA_PATH;
+    private String DATA_PATH, DATA_PATH_LOCAL;
     private String mCurrentPhotoPath;
     private Mat m;
     public static int thresholdMin = 85; // Threshold 80 to 105 is Ok
@@ -95,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         Context mContext = getApplicationContext();
         DATA_PATH = mContext.getExternalFilesDir(null).toString() + "/Tess";
+        DATA_PATH_LOCAL = getApplicationContext().getFilesDir() + "/tesseract";
         setContentView(R.layout.capture);
 
         if(OpenCVLoader.initDebug()){
@@ -113,22 +118,61 @@ public class MainActivity extends AppCompatActivity {
 
         m = new Mat();
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.crosswordtest).copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.crosswordtest3).copy(Bitmap.Config.ARGB_8888, true);
 
         Button button1 = findViewById(R.id.test_button);
 
+        Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_CROSS, new Size(5, 5));
+
         Utils.bitmapToMat(bitmap, m);
+
+        Size mSize = m.size();
+        double factor = Math.min(1 , 1024.0 / mSize.width);
+        Size reSize = new Size(factor * mSize.width, factor * mSize.height);
+//        resize(m, m, new Size(mSize.width * 10, mSize.height * 10), INTER_CUBIC);
 
         Imgproc.cvtColor(m, m, Imgproc.COLOR_RGB2GRAY);
         Core.bitwise_not(m, m);
 
-        Mat noiseless = m;
+//        resize(m, m, new Size(640, 480), 0, 0, INTER_CUBIC);
+        Mat noiseless = m.clone();
+
+        Imgproc.Canny(noiseless, noiseless, 10, 255);
+        Imgproc.dilate(noiseless, noiseless, kernel);
+        Imgproc.erode(noiseless, noiseless, kernel);
+
+        Mat mLines= new Mat();
+        Imgproc.HoughLines(noiseless, mLines, 1, Math.PI/180, 150);
 
 
-        Imgproc.Canny(noiseless, noiseless, THRESH_OTSU * 0.5, THRESH_OTSU);
+        Scalar color = new Scalar(0, 0, 255);
+
+        double[] data;
+        double rho, theta;
+        Point pt1 = new Point();
+        Point pt2 = new Point();
+        double a, b;
+        double x0, y0;
+        for (int i = 0; i < mLines.cols(); i++)
+        {
+            data = mLines.get(0, i);
+            rho = data[0];
+            theta = data[1];
+            a = Math.cos(theta);
+            b = Math.sin(theta);
+            x0 = a*rho;
+            y0 = b*rho;
+            pt1.x = Math.round(x0 + 1000*(-b));
+            pt1.y = Math.round(y0 + 1000*a);
+            pt2.x = Math.round(x0 - 1000*(-b));
+            pt2.y = Math.round(y0 - 1000 *a);
+            Imgproc.line(noiseless, pt1, pt2, color, 3);
+        }
+
+
 
         List<MatOfPoint> contours = new ArrayList<>();
-        Imgproc.findContours(noiseless, contours, new Mat(), RETR_TREE, CHAIN_APPROX_SIMPLE, new Point(0, 0));
+        Imgproc.findContours(noiseless, contours, new Mat(), RETR_TREE, CHAIN_APPROX_SIMPLE);
 
         double largest_area =0;
         int largest_contour_index = 0;
@@ -141,11 +185,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Imgproc.drawContours(noiseless, contours, largest_contour_index, new Scalar(0, 255, 0), 3);
+        Imgproc.drawContours(noiseless, contours, largest_contour_index, new Scalar(0, 255, 255), 3);
+        Rect rect = Imgproc.boundingRect(contours.get(largest_contour_index));
+        Mat cropped =  m.submat(rect);
 
-        Bitmap noiselessbmp = Bitmap.createBitmap(noiseless.cols(), noiseless.rows(), Bitmap.Config.ARGB_8888);
+        Bitmap finalbmp = Bitmap.createBitmap(cropped.cols(), cropped.rows(), Bitmap.Config.ARGB_8888);
 
-        Utils.matToBitmap(noiseless, noiselessbmp);
+        Utils.matToBitmap(cropped, finalbmp);
 
 
 
@@ -154,7 +200,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 test.setImageBitmap(bitmap);
-                test.setImageBitmap(noiselessbmp);
+                test.setImageBitmap(finalbmp);
+//                String res = getText(finalbmp);
+//                textView.setText(res);
             }
         });
 
@@ -177,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void dispatchTakePictureIntent() {
+        private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -323,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
 
         GaussianBlur(grayMat, grayMat, new Size(5, 5), 0);
         // The thresold value will be used here
-        threshold(grayMat, grayMat, thresholdMin, thresholdMax, THRESH_BINARY);
+        adaptiveThreshold(grayMat,  grayMat, 255, 1, 1, 11, 2);
 
         return grayMat;
     }

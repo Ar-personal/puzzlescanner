@@ -76,17 +76,17 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="298dp" />
+
+            <ImageView
 
                 android:id="@+id/ocr_image"
 
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
             <Button
                 android:layout_width="match_parent"

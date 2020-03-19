@@ -12,33 +12,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8e2b93b-610f-41a7-9a8b-cfc117552433" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/eng.traineddata" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/assets/tessData/eng.traineddata" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/intermediates/incremental/debug-mergeNativeLibs/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/intermediates/incremental/debug-mergeNativeLibs/merge-state" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/intermediates/incremental/mergeDebugShaders/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/intermediates/incremental/mergeDebugShaders/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/intermediates/incremental/packageDebugAssets/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/intermediates/incremental/packageDebugAssets/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/intermediates/incremental/packageDebugResources/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/intermediates/incremental/packageDebugResources/merger.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/intermediates/manifest_merge_blame_file/debugAndroidTest/manifest-merger-blame-debug-androidTest-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/intermediates/manifest_merge_blame_file/debugAndroidTest/manifest-merger-blame-debug-androidTest-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/capture.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/capture.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,8 +50,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="138" column="43" lean-forward="true" selection-start-line="138" selection-start-column="43" selection-end-line="138" selection-end-column="43" />
+            <state relative-caret-position="-155">
+              <caret line="163" column="23" lean-forward="true" selection-start-line="163" selection-start-column="23" selection-end-line="163" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -108,8 +94,8 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/capture.xml">
-          <provider editor-type-id="android-designer2" />
-          <provider selected="true" editor-type-id="text-editor">
+          <provider selected="true" editor-type-id="android-designer2" />
+          <provider editor-type-id="text-editor">
             <state relative-caret-position="1581">
               <caret line="93" column="47" selection-start-line="93" selection-start-column="47" selection-end-line="93" selection-end-column="47" />
             </state>
@@ -124,17 +110,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/capture.xml" />
         <option value="$PROJECT_DIR$/opencv/build.gradle" />
         <option value="$PROJECT_DIR$/ocv/build.gradle" />
         <option value="$PROJECT_DIR$/settings.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/capture.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/MainActivity.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="360" />
-    <option name="y" value="-8" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1912" />
+    <option name="y" value="96" />
     <option name="width" value="1456" />
     <option name="height" value="876" />
   </component>
@@ -145,7 +131,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -186,12 +171,66 @@
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="puzzlescanner" type="b2602c69:ProjectViewProjectNode" />
               <item name="puzzlescanner" type="9c53a853:ProjectViewModuleGroupNode" />
               <item name="app" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="tessData" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="puzzlescanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="puzzlescanner" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="puzzlescanner" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="puzzlescanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="puzzlescanner" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="puzzlescanner" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="puzzlescanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="puzzlescanner" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="puzzlescanner" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="puzzlescanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="puzzlescanner" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="puzzlescanner" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="puzzlescanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="puzzlescanner" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="puzzlescanner" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="puzzlescanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="puzzlescanner" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="puzzlescanner" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="puzzlescanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="puzzlescanner" type="9c53a853:ProjectViewModuleGroupNode" />
+              <item name="puzzlescanner" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -206,8 +245,9 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -222,13 +262,15 @@
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Alex\Documents\GitHub\puzzlescanner\app\src\main\res\drawable" />
+      <recent name="C:\Users\Alex\Documents\GitHub\puzzlescanner\app\src\main\assets\tessData" />
+      <recent name="C:\Users\Alex\Dropbox\University\CI560 - Mobile application development\Sem2\puzzlescanner\app\src\main\res\drawable" />
+      <recent name="C:\Users\Alex\Dropbox\University\CI560 - Mobile application development\Sem2\puzzlescanner" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Alex\Dropbox\University\CI560 - Mobile application development\Sem2\puzzlescanner\app\src\main" />
       <recent name="C:\Users\Alex\Dropbox\University\CI560 - Mobile application development\Sem2\puzzlescanner\app" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Alex\Dropbox\University\CI560 - Mobile application development\Sem2\puzzlescanner\app\src\main\res\drawable" />
-      <recent name="C:\Users\Alex\Dropbox\University\CI560 - Mobile application development\Sem2\puzzlescanner" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -310,7 +352,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5f12cfcc-e43f-4cb3-8642-b8e601270132" name="Default Changelist" comment="" />
+      <changelist id="a8e2b93b-610f-41a7-9a8b-cfc117552433" name="Default Changelist" comment="" />
       <created>1582911186405</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -358,7 +400,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584378701286</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Merge branch 'master' of https://github.com/Ar-personal/puzzlescanner&#10;&#10;# Conflicts:&#10;#&#9;.gradle/5.4.1/executionHistory/executionHistory.bin&#10;#&#9;.gradle/5.4.1/executionHistory/executionHistory.lock&#10;#&#9;.gradle/5.4.1/fileHashes/fileHashes.bin&#10;#&#9;.gradle/5.4.1/fileHashes/fileHashes.lock&#10;#&#9;.gradle/5.4.1/fileHashes/resourceHashesCache.bin&#10;#&#9;.gradle/5.4.1/javaCompile/classAnalysis.bin&#10;#&#9;.gradle/5.4.1/javaCompile/jarAnalysis.bin&#10;#&#9;.gradle/5.4.1/javaCompile/javaCompile.lock&#10;#&#9;.gradle/5.4.1/javaCompile/taskHistory.bin&#10;#&#9;.gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;#&#9;.gradle/buildOutputCleanup/outputFiles.bin&#10;#&#9;.idea/caches/build_file_checksums.ser&#10;#&#9;.idea/caches/gradle_models.ser&#10;#&#9;app/app.iml&#10;#&#9;app/src/main/java/com/example/puzzlio/MainActivity.java&#10;#&#9;ocv/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar&#10;#&#9;ocv/build/intermediates/incremental/debug-mergeJavaRes/merge-state&#10;#&#9;ocv/build/intermediates/incremental/debug-mergeNativeLibs/merge-state&#10;#&#9;ocv/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/mergeDebugShaders/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/packageDebugAssets/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/packageDebugResources/compile-file-map.properties&#10;#&#9;ocv/build/intermediates/incremental/packageDebugResources/merger.xml&#10;#&#9;ocv/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt&#10;#&#9;ocv/build/intermediates/manifest_merge_blame_file/debugAndroidTest/manifest-merger-blame-debug-androidTest-report.txt&#10;#&#9;ocv/build/outputs/logs/manifest-merger-debug-report.txt">
+      <created>1584479386168</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1584479386168</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -371,11 +420,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="1912" y="96" width="1456" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24520256" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.3295129" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -383,12 +432,12 @@
       <window_info id="Resources Explorer" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Favorites" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="0" sideWeight="0.49928367" weight="0.26218852" />
-      <window_info anchor="bottom" id="Logcat" order="1" weight="0.4084507" />
-      <window_info anchor="bottom" id="Android Profiler" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.49946696" weight="0.32827735" />
+      <window_info active="true" anchor="bottom" id="Build" order="0" sideWeight="0.49928367" visible="true" weight="0.3257066" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.4078062" />
+      <window_info anchor="bottom" id="Android Profiler" order="2" weight="0.32974428" />
+      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.49946696" weight="0.3270525" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.50053304" side_tool="true" weight="0.26435536" />
-      <window_info anchor="bottom" id="Run" order="5" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="5" weight="0.32839838" />
       <window_info anchor="bottom" id="Debug" order="6" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32974428" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32974428" />
@@ -409,11 +458,15 @@
     </ignored-roots>
     <MESSAGE value="basic prototype with tesseract and opencv succesfully implemented" />
     <MESSAGE value="open cv actually successfully implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="open cv actually successfully implemented" />
+    <MESSAGE value="Merge branch 'master' of https://github.com/Ar-personal/puzzlescanner&#10;&#10;# Conflicts:&#10;#&#9;.gradle/5.4.1/executionHistory/executionHistory.bin&#10;#&#9;.gradle/5.4.1/executionHistory/executionHistory.lock&#10;#&#9;.gradle/5.4.1/fileHashes/fileHashes.bin&#10;#&#9;.gradle/5.4.1/fileHashes/fileHashes.lock&#10;#&#9;.gradle/5.4.1/fileHashes/resourceHashesCache.bin&#10;#&#9;.gradle/5.4.1/javaCompile/classAnalysis.bin&#10;#&#9;.gradle/5.4.1/javaCompile/jarAnalysis.bin&#10;#&#9;.gradle/5.4.1/javaCompile/javaCompile.lock&#10;#&#9;.gradle/5.4.1/javaCompile/taskHistory.bin&#10;#&#9;.gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;#&#9;.gradle/buildOutputCleanup/outputFiles.bin&#10;#&#9;.idea/caches/build_file_checksums.ser&#10;#&#9;.idea/caches/gradle_models.ser&#10;#&#9;app/app.iml&#10;#&#9;app/src/main/java/com/example/puzzlio/MainActivity.java&#10;#&#9;ocv/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar&#10;#&#9;ocv/build/intermediates/incremental/debug-mergeJavaRes/merge-state&#10;#&#9;ocv/build/intermediates/incremental/debug-mergeNativeLibs/merge-state&#10;#&#9;ocv/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/mergeDebugShaders/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/packageDebugAssets/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/packageDebugResources/compile-file-map.properties&#10;#&#9;ocv/build/intermediates/incremental/packageDebugResources/merger.xml&#10;#&#9;ocv/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt&#10;#&#9;ocv/build/intermediates/manifest_merge_blame_file/debugAndroidTest/manifest-merger-blame-debug-androidTest-report.txt&#10;#&#9;ocv/build/outputs/logs/manifest-merger-debug-report.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/Ar-personal/puzzlescanner&#10;&#10;# Conflicts:&#10;#&#9;.gradle/5.4.1/executionHistory/executionHistory.bin&#10;#&#9;.gradle/5.4.1/executionHistory/executionHistory.lock&#10;#&#9;.gradle/5.4.1/fileHashes/fileHashes.bin&#10;#&#9;.gradle/5.4.1/fileHashes/fileHashes.lock&#10;#&#9;.gradle/5.4.1/fileHashes/resourceHashesCache.bin&#10;#&#9;.gradle/5.4.1/javaCompile/classAnalysis.bin&#10;#&#9;.gradle/5.4.1/javaCompile/jarAnalysis.bin&#10;#&#9;.gradle/5.4.1/javaCompile/javaCompile.lock&#10;#&#9;.gradle/5.4.1/javaCompile/taskHistory.bin&#10;#&#9;.gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;#&#9;.gradle/buildOutputCleanup/outputFiles.bin&#10;#&#9;.idea/caches/build_file_checksums.ser&#10;#&#9;.idea/caches/gradle_models.ser&#10;#&#9;app/app.iml&#10;#&#9;app/src/main/java/com/example/puzzlio/MainActivity.java&#10;#&#9;ocv/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar&#10;#&#9;ocv/build/intermediates/incremental/debug-mergeJavaRes/merge-state&#10;#&#9;ocv/build/intermediates/incremental/debug-mergeNativeLibs/merge-state&#10;#&#9;ocv/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/mergeDebugShaders/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/packageDebugAssets/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/packageDebugResources/compile-file-map.properties&#10;#&#9;ocv/build/intermediates/incremental/packageDebugResources/merger.xml&#10;#&#9;ocv/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt&#10;#&#9;ocv/build/intermediates/manifest_merge_blame_file/debugAndroidTest/manifest-merger-blame-debug-androidTest-report.txt&#10;#&#9;ocv/build/outputs/logs/manifest-merger-debug-report.txt" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/MainActivity (Alex Reid's conflicted copy 2020-03-13).java" />
     <entry file="file://$PROJECT_DIR$/opencv/build.gradle" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ocr_sample1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -435,23 +488,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/capture.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
         <state relative-caret-position="1581">
           <caret line="93" column="47" selection-start-line="93" selection-start-column="47" selection-end-line="93" selection-end-column="47" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ocr_sample1.png">
-      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/crosswordtest.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="138" column="43" lean-forward="true" selection-start-line="138" selection-start-column="43" selection-end-line="138" selection-end-column="43" />
+        <state relative-caret-position="-155">
+          <caret line="163" column="23" lean-forward="true" selection-start-line="163" selection-start-column="23" selection-end-line="163" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
