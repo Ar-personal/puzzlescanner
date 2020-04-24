@@ -2,10 +2,14 @@ package com.example.puzzlio;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,17 +23,28 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
+import org.opencv.core.CvException;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
@@ -51,6 +66,7 @@ import org.opencv.videoio.VideoCapture;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,6 +81,7 @@ import static org.opencv.imgproc.Imgproc.CHAIN_APPROX_NONE;
 import static org.opencv.imgproc.Imgproc.CHAIN_APPROX_SIMPLE;
 import static org.opencv.imgproc.Imgproc.GaussianBlur;
 import static org.opencv.imgproc.Imgproc.INTER_CUBIC;
+import static org.opencv.imgproc.Imgproc.LINE_AA;
 import static org.opencv.imgproc.Imgproc.MORPH_RECT;
 import static org.opencv.imgproc.Imgproc.RETR_CCOMP;
 import static org.opencv.imgproc.Imgproc.RETR_TREE;
@@ -86,135 +103,120 @@ public class MainActivity extends AppCompatActivity {
     private Uri outputFileDir;
     private String DATA_PATH, DATA_PATH_LOCAL;
     private String mCurrentPhotoPath;
-    private Mat m;
-    public static int thresholdMin = 85; // Threshold 80 to 105 is Ok
-    private int thresholdMax = 255; // Always 255
+    private ImageProcessing imageProcessing;
+    private Bitmap bitmap, finalbmp;
 
-
-
+    private FragmentPagerAdapter fragmentPagerAdapter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        viewPager = findViewById(R.id.viewPager);
+        setPagerAdapter();
 
-        Context mContext = getApplicationContext();
-        DATA_PATH = mContext.getExternalFilesDir(null).toString() + "/Tess";
-        DATA_PATH_LOCAL = getApplicationContext().getFilesDir() + "/tesseract";
-        setContentView(R.layout.capture);
-
-        if(OpenCVLoader.initDebug()){
-            Toast.makeText(this, "loaded", Toast.LENGTH_SHORT).show();
-        }else{
-            Log.d("ok", "open cv fault");
-        }
-
-        textView = (TextView) this.findViewById(R.id.ocr_text);
-        Button button = findViewById(R.id.scan_button);
-
-        final Activity activity = this;
-
-        ImageView test = findViewById(R.id.imageView);
-
-
-        m = new Mat();
-
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.crosswordtest3).copy(Bitmap.Config.ARGB_8888, true);
-
-        Button button1 = findViewById(R.id.test_button);
-
-        Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_CROSS, new Size(5, 5));
-
-        Utils.bitmapToMat(bitmap, m);
-
-        Size mSize = m.size();
-        double factor = Math.min(1 , 1024.0 / mSize.width);
-        Size reSize = new Size(factor * mSize.width, factor * mSize.height);
-//        resize(m, m, new Size(mSize.width * 10, mSize.height * 10), INTER_CUBIC);
-
-        Imgproc.cvtColor(m, m, Imgproc.COLOR_RGB2GRAY);
-        Core.bitwise_not(m, m);
-
-//        resize(m, m, new Size(640, 480), 0, 0, INTER_CUBIC);
-        Mat noiseless = m.clone();
-
-        Imgproc.Canny(noiseless, noiseless, 10, 255);
-        Imgproc.dilate(noiseless, noiseless, kernel);
-        Imgproc.erode(noiseless, noiseless, kernel);
-
-        Mat mLines= new Mat();
-        Imgproc.HoughLines(noiseless, mLines, 1, Math.PI/180, 150);
-
-
-        Scalar color = new Scalar(0, 0, 255);
-
-        double[] data;
-        double rho, theta;
-        Point pt1 = new Point();
-        Point pt2 = new Point();
-        double a, b;
-        double x0, y0;
-        for (int i = 0; i < mLines.cols(); i++)
-        {
-            data = mLines.get(0, i);
-            rho = data[0];
-            theta = data[1];
-            a = Math.cos(theta);
-            b = Math.sin(theta);
-            x0 = a*rho;
-            y0 = b*rho;
-            pt1.x = Math.round(x0 + 1000*(-b));
-            pt1.y = Math.round(y0 + 1000*a);
-            pt2.x = Math.round(x0 - 1000*(-b));
-            pt2.y = Math.round(y0 - 1000 *a);
-            Imgproc.line(noiseless, pt1, pt2, color, 3);
-        }
-
-
-
-        List<MatOfPoint> contours = new ArrayList<>();
-        Imgproc.findContours(noiseless, contours, new Mat(), RETR_TREE, CHAIN_APPROX_SIMPLE);
-
-        double largest_area =0;
-        int largest_contour_index = 0;
-
-        for (int contourIdx = 0; contourIdx < contours.size(); contourIdx++) {
-            double contourArea = Imgproc.contourArea(contours.get(contourIdx));
-            if (contourArea > largest_area) {
-                largest_area = contourArea;
-                largest_contour_index = contourIdx;
-            }
-        }
-
-        Imgproc.drawContours(noiseless, contours, largest_contour_index, new Scalar(0, 255, 255), 3);
-        Rect rect = Imgproc.boundingRect(contours.get(largest_contour_index));
-        Mat cropped =  m.submat(rect);
-
-        Bitmap finalbmp = Bitmap.createBitmap(cropped.cols(), cropped.rows(), Bitmap.Config.ARGB_8888);
-
-        Utils.matToBitmap(cropped, finalbmp);
-
-
-
-
-        button1.setOnClickListener(new View.OnClickListener() {
+        BottomAppBar appBar = findViewById(R.id.bottomAppBar);
+        setSupportActionBar(appBar);
+        appBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                test.setImageBitmap(bitmap);
-                test.setImageBitmap(finalbmp);
-//                String res = getText(finalbmp);
-//                textView.setText(res);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_coontainer, new SocialTab()).commit();
             }
         });
+
+        appBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Fragment selectedFragment = null;
+                switch (item.getItemId()){
+                    case(R.id.home):
+                        System.out.println("go on");
+                        selectedFragment = new PuzzleList();
+                        break;
+                    case(R.id.fab):
+                        selectedFragment = new PuzzleList();
+                        break;
+                }
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_coontainer, selectedFragment).commit();
+
+                return true;
+            }
+        });
+
+        FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PopupScanCreate.class);
+                startActivity(intent);
+            }
+        });
+//        Context mContext = getApplicationContext();
+//        DATA_PATH = mContext.getExternalFilesDir(null).toString() + "/Tess";
+//        DATA_PATH_LOCAL = getApplicationContext().getFilesDir() + "/tesseract";
+//        setContentView(R.layout.activity_main);
+////        setContentView(R.layout.capture);
+//
+//        if(OpenCVLoader.initDebug()){
+//            Toast.makeText(this, "loaded", Toast.LENGTH_SHORT).show();
+//        }else{
+//            Log.d("ok", "open cv fault");
+//        }
+
+//        textView = (TextView) this.findViewById(R.id.ocr_text);
+//        Button button = findViewById(R.id.scan_button);
+//        Button button1 = findViewById(R.id.test_button);
+//
+//        ImageView test = findViewById(R.id.imageView);
+//
+//        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.crosswordtest3).copy(Bitmap.Config.ARGB_8888, true);
+//
+//        imageProcessing = new ImageProcessing(this);
+//        imageProcessing.setBitmap(bitmap);
+//
+//        imageProcessing.img();
+//
+//
+//        button1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                test.setImageBitmap(bitmap);
+//                test.setImageBitmap(finalbmp);
+////                String res = getText(finalbmp);
+////                textView.setText(res);
+//            }
+//        });
 
         checkPermission();
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkPermission();
-                dispatchTakePictureIntent();
-            }
-        });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                checkPermission();
+//                dispatchTakePictureIntent();
+//            }
+//        });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.bottom_nav, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    private void setPagerAdapter(){
+        fragmentPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(fragmentPagerAdapter);
+    }
+
+
+    public void setBitmaps(Mat m){
+        finalbmp = Bitmap.createBitmap(m.cols(), m.rows(), Bitmap.Config.ARGB_8888);
+
+        Utils.matToBitmap(m, finalbmp);
+    }
+
 
     private void checkPermission() {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -276,6 +278,37 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Result canceled.", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Activity result failed.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void writeMats(List<Mat> mats) {
+        Bitmap bmp;
+        List<Bitmap> bmpList = new ArrayList<>();
+        for (int e = 0; e < mats.size(); e++) {
+            try {
+                bmp = Bitmap.createBitmap(mats.get(e).cols(), mats.get(e).rows(), Bitmap.Config.ARGB_8888);
+                Utils.matToBitmap(mats.get(e), bmp);
+                bmpList.add(bmp);
+                System.out.println("writing bitmap to sd card");
+            } catch (CvException o) {
+                o.printStackTrace();
+            }
+            mats.get(e).release();
+        }
+
+        for (int i = 0; i < bmpList.size(); i++) {
+            File sd = new File(getExternalFilesDir("/grids").toString() + "/" + i + ".png");
+            try {
+                sd.createNewFile();
+                FileOutputStream out = new FileOutputStream(sd);
+                bmpList.get(i).compress(Bitmap.CompressFormat.PNG, 100, out);
+                out.flush();
+                out.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -374,5 +407,13 @@ public class MainActivity extends AppCompatActivity {
         adaptiveThreshold(grayMat,  grayMat, 255, 1, 1, 11, 2);
 
         return grayMat;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 }
