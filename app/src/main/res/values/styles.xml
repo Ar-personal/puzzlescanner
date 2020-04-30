@@ -20,4 +20,10 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 
+    <style name="puzzleTheme" parent="Theme.MaterialComponents">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/appBlue</item>
+        <item name="colorAccent">@color/appGreen</item>
+    </style>
+
 </resources>

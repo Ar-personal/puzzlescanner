@@ -10,7 +10,7 @@
 
     android:fillViewport="true"
 
-    tools:context=".MainActivity">
+    tools:context="com.example.puzzlio.MainActivity">
 
     <LinearLayout
 

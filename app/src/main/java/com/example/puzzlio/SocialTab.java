@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.puzzlio.R;
+
 public class SocialTab extends Fragment {
 
     @Override

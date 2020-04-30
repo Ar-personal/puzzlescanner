@@ -39,8 +39,13 @@
         </activity>
 
         <activity android:name=".PopupScanCreate" android:theme="@style/popupTheme">
-            android:
         </activity>
+
+        <activity android:name=".CreatePuzzle"></activity>
+
+        <activity android:name=".Soduku" android:theme="@style/puzzleTheme"></activity>
+
+        <activity android:name=".Crossword"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
