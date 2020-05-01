@@ -32,7 +32,7 @@ public class SudokuCreator extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.soduku);
+        setContentView(R.layout.sudokucreator);
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.sodukulayout);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);

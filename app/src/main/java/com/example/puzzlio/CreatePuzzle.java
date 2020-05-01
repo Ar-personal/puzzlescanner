@@ -104,7 +104,7 @@ public class CreatePuzzle extends AppCompatActivity implements AdapterView.OnIte
             puzzleType = index;
             x.setText(String.valueOf(9));
             y.setText(String.valueOf(9));
-            System.out.println("soduku?");
+            System.out.println("sudokucreator?");
         }
     }
 

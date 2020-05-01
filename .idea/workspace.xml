@@ -11,31 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a8e2b93b-610f-41a7-9a8b-cfc117552433" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/SudokuCreator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_lock_open_green_60dp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_lock_outline_red_60dp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/lockunlock.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/CreatePuzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/CreatePuzzle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/Grid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/puzzlio/Soduku.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/grid.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/grid.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/soduku.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/soduku.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ocv/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/ocv/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -439,7 +415,7 @@
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="PsdUISettings">
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
@@ -618,7 +594,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588258641785</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Create puzzle functionality&#10;Sudoku puzzle creater added&#10;&#10;Merge branch 'master' of https://github.com/Ar-personal/puzzlescanner&#10;&#10;# Conflicts:&#10;#&#9;.gradle/5.4.1/executionHistory/executionHistory.bin&#10;#&#9;.gradle/5.4.1/executionHistory/executionHistory.lock&#10;#&#9;.gradle/5.4.1/fileHashes/fileHashes.bin&#10;#&#9;.gradle/5.4.1/fileHashes/fileHashes.lock&#10;#&#9;.gradle/5.4.1/fileHashes/resourceHashesCache.bin&#10;#&#9;.gradle/5.4.1/javaCompile/classAnalysis.bin&#10;#&#9;.gradle/5.4.1/javaCompile/jarAnalysis.bin&#10;#&#9;.gradle/5.4.1/javaCompile/javaCompile.lock&#10;#&#9;.gradle/5.4.1/javaCompile/taskHistory.bin&#10;#&#9;.gradle/buildOutputCleanup/buildOutputCleanup.lock&#10;#&#9;.gradle/buildOutputCleanup/outputFiles.bin&#10;#&#9;.idea/caches/build_file_checksums.ser&#10;#&#9;.idea/caches/gradle_models.ser&#10;#&#9;app/app.iml&#10;#&#9;app/src/main/java/com/example/puzzlio/MainActivity.java&#10;#&#9;ocv/build/intermediates/compile_only_not_namespaced_r_class_jar/debug/R.jar&#10;#&#9;ocv/build/intermediates/incremental/debug-mergeJavaRes/merge-state&#10;#&#9;ocv/build/intermediates/incremental/debug-mergeNativeLibs/merge-state&#10;#&#9;ocv/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/mergeDebugShaders/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/packageDebugAssets/merger.xml&#10;#&#9;ocv/build/intermediates/incremental/packageDebugResources/compile-file-map.properties&#10;#&#9;ocv/build/intermediates/incremental/packageDebugResources/merger.xml&#10;#&#9;ocv/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt&#10;#&#9;ocv/build/intermediates/manifest_merge_blame_file/debugAndroidTest/manifest-merger-blame-debug-androidTest-report.txt&#10;#&#9;ocv/build/outputs/logs/manifest-merger-debug-report.txt">
+      <created>1588351506653</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1588351506653</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView">
@@ -632,6 +615,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49945828" visible="true" weight="0.17750533" />
