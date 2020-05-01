@@ -13,15 +13,7 @@ public class Grid extends AppCompatActivity {
         setContentView(R.layout.grid);
     }
 
-    private TextView textView;
 
-    public Grid(){
-        textView = findViewById(R.id.gridText);
-        textView.setText(null);
-    }
 
-    public Grid(Character c){
-        textView = findViewById(R.id.gridText);
-        textView.setText(null);
-    }
+
 }

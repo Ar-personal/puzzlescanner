@@ -82,7 +82,7 @@ public class CreatePuzzle extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
                 if(puzzleType == 1) {
-                    Intent intent = new Intent(CreatePuzzle.this, Soduku.class);
+                    Intent intent = new Intent(CreatePuzzle.this, SudokuCreator.class);
                     startActivity(intent);
                     finish();
                 }

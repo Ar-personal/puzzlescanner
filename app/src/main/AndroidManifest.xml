@@ -43,7 +43,7 @@
 
         <activity android:name=".CreatePuzzle"></activity>
 
-        <activity android:name=".Soduku" android:theme="@style/puzzleTheme"></activity>
+        <activity android:name=".SudokuCreator" android:theme="@style/puzzleTheme"></activity>
 
         <activity android:name=".Crossword"></activity>
 
