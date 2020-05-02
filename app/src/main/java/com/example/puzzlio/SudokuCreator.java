@@ -1,6 +1,7 @@
 package com.example.puzzlio;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,26 +14,50 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
-public class SudokuCreator extends AppCompatActivity{
+import java.io.Serializable;
+import java.lang.reflect.Array;
 
-    private Button[][] gridButtons = new Button[9][9]; //not needed?
-    private Button gridButton;
+public class SudokuCreator extends AppCompatActivity implements Serializable{
+
+    private Integer[][] dims;
+    private Button[][] gridButtons;
     private ToggleButton toggleButton;
     private boolean locked;
-    private CharSequence text;
+    private String text, title;
+    private int puzzleType;
+    private TextView puzzleTitle;
+    private Integer[][] arrayLocked, arrayBlack;
+    private String[][] arrayValues;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sudokucreator);
+
+        Bundle extras = getIntent().getExtras();
+        title = extras.getString("title");
+        puzzleType = extras.getInt("type");
+        dims =  (Integer[][]) extras.getSerializable("grid");
+
+        gridButtons = new Button[dims.length][dims.length];
+
+        //terrible code how on earth do u initlaise 2d array with another 2d array
+
+
+        puzzleTitle = findViewById(R.id.puzzleTitle);
+        puzzleTitle.setText(title);
+
+
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.sodukulayout);
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -76,7 +101,7 @@ public class SudokuCreator extends AppCompatActivity{
                 gridButtons[x][y].setText("");
                 gridButtons[x][y].setTextColor(Color.BLACK);
                 gridButtons[x][y].setGravity(Gravity.CENTER);
-                gridButtons[x][y].setTextSize(25);
+                gridButtons[x][y].setTextSize(28);
                 gridButtons[x][y].setPadding(0, 0, 0, 0);
                 gridButtons[x][y].setBackgroundResource(R.drawable.gridborder);
                 gridButtons[x][y].setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -101,7 +126,7 @@ public class SudokuCreator extends AppCompatActivity{
                     @Override
                     public void onClick(View view) {
                         if (!locked) {
-                            gridButtons[j][k].setBackgroundColor(Color.GREEN);
+                            gridButtons[j][k].setBackground(ContextCompat.getDrawable(SudokuCreator.this, R.drawable.ic_lock_open_green_30dp));
                             AlertDialog.Builder builder = new AlertDialog.Builder(SudokuCreator.this);
                             builder.setTitle("Edit");
                             EditText input = new EditText(SudokuCreator.this);
@@ -126,15 +151,11 @@ public class SudokuCreator extends AppCompatActivity{
 
                             builder.show();
                         }else{
-                            gridButtons[j][k].setBackgroundColor(Color.RED);
+                            gridButtons[j][k].setBackground(ContextCompat.getDrawable(SudokuCreator.this, R.drawable.ic_lock_outline_red_30dp));
                             Toast.makeText(SudokuCreator.this, "Unlock to edit", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-
-
-
 
 
                 System.out.println(gridButtons[x][y].getText());
@@ -148,8 +169,46 @@ public class SudokuCreator extends AppCompatActivity{
 
         }
 
+        prepareArrays(gridButtons);
+
+        Button createButton = findViewById(R.id.createsudoku);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SudokuCreator.this, Puzzle.class);
+
+                intent.putExtra("name", title);
+                intent.putExtra("type", puzzleType);
+
+                intent.putExtra("gridValues", arrayValues);
+                intent.putExtra("gridLocked", arrayLocked);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
+    private void prepareArrays(Button[][] b) {
+         arrayValues = new String[dims.length][dims.length];
+         arrayLocked = dims;
+         arrayBlack = dims;
+
+        for(int i = 0; i < b.length; i++){
+            for(int j = 0; j < b[i].length; j++){
+                CharSequence v1 = b[i][j].getText();
+                if(v1.toString() != "" || v1 != null) {
+                    arrayValues[i][j] == String.valueOf(v1);
+                }
+
+                if(b[i][j].getBackground() == ContextCompat.getDrawable(SudokuCreator.this, R.drawable.ic_lock_outline_red_30dp)){
+                    arrayLocked[i][j] = -1;
+                }
+
+
+            }
+        }
+    }
 
 
 }

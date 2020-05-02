@@ -47,6 +47,8 @@
 
         <activity android:name=".Crossword"></activity>
 
+        <activity android:name=".Puzzle" android:theme="@style/puzzleTheme"></activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
