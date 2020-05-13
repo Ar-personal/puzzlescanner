@@ -12,9 +12,9 @@ public class FragmentPagerAdapter extends androidx.fragment.app.FragmentPagerAda
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new PuzzleList();
-            case 1:
                 return new SocialTab();
+            case 1:
+                return new PuzzleList();
             default:
                 return null;
         }

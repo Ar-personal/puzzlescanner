@@ -1,9 +1,11 @@
 package com.example.puzzlio;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,13 +17,13 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<String> mData;
-
+    private List<Puzzle> mData;
+    private Context context;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public RecyclerViewAdapter(List<String> data) {
-
+    public RecyclerViewAdapter(Context context, List<Puzzle> data) {
+        this.context = context;
         this.mData = data;
     }
 
@@ -35,8 +37,41 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = mData.get(position);
-        holder.myTextView.setText(animal);
+
+        Puzzle puzzle = mData.get(position);
+        holder.myTextView.setText(puzzle.getName());
+
+        switch (puzzle.getPuzzleType()){
+            case 2:
+                holder.subtitle.setText("Sudoku");
+            default:
+                System.out.println("unsupported puzzle type in recyclerviewadapter");
+        }
+
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PuzzleList.deleteItem(position);
+            }
+        });
+
+        holder.play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Puzzle.class);
+                intent.putExtra("load", true);
+                intent.putExtra("position", position);
+                intent.putExtra("type", puzzle.getPuzzleType());
+                intent.putExtra("name", puzzle.getName());
+                intent.putExtra("gridValues", puzzle.getArrayValues());
+                intent.putExtra("gridLocked", puzzle.getArrayLocked());
+                intent.putExtra("dims", puzzle.getDims());
+                System.out.println(puzzle.getArrayValues());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     // total number of rows
@@ -51,6 +86,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView myTextView, subtitle;
         ImageView icon;
         ImageView play;
+        ImageButton delete;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -58,7 +94,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             subtitle = itemView.findViewById(R.id.subtitle);
             icon = itemView.findViewById(R.id.icon);
             play = itemView.findViewById(R.id.play);
-            itemView.setOnClickListener(this);
+            delete = itemView.findViewById(R.id.deletepuzzle);
+
+
         }
 
         @Override
@@ -68,7 +106,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     // convenience method for getting data at click position
-    String getItem(int id) {
+    Puzzle getItem(int id) {
         return mData.get(id);
     }
 

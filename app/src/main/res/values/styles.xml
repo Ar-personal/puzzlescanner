@@ -26,4 +26,15 @@
         <item name="colorAccent">@color/appGreen</item>
     </style>
 
+    <style name="customBar" parent="Theme.MaterialComponents.NoActionBar">
+
+    </style>
+
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+    </style>
+
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+    </style>
+
 </resources>

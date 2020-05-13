@@ -9,7 +9,8 @@
         android:id="@+id/edit"
         android:icon="@drawable/ic_edit_white_24dp"
         android:title="Edit"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"
+/>
 
     <item
         android:id="@+id/home"

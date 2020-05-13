@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.reflect.Array;
 
+import butterknife.OnItemSelected;
+
 public class CreatePuzzle extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private TextView x, y;
@@ -26,16 +29,17 @@ public class CreatePuzzle extends AppCompatActivity implements AdapterView.OnIte
     private EditText editText;
     private String title;
     private Integer[][] array;
+    private int[][] dims;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.createpuzzle);
 
-        Spinner spinner = findViewById(R.id.puzzleTypeSpinner);
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.items, android.R.layout.simple_spinner_item);
 
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner = findViewById(R.id.puzzleTypeSpinner);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.items, R.layout.spinnertext);
+        arrayAdapter.setDropDownViewResource(R.layout.custom_spinner);
         spinner.setAdapter(arrayAdapter);
 
         editText = findViewById(R.id.userpuzzletitle);
@@ -110,7 +114,7 @@ public class CreatePuzzle extends AppCompatActivity implements AdapterView.OnIte
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(puzzleType == 1) {
+                if(puzzleType == 2) {
                     if(title.length() == 0 || title == "" || title == null){
                         Toast.makeText(CreatePuzzle.this, "invalid puzzle name", Toast.LENGTH_SHORT).show();
                     }else {
@@ -119,12 +123,22 @@ public class CreatePuzzle extends AppCompatActivity implements AdapterView.OnIte
                         array = new Integer[dimX][dimY];
                         intent.putExtra("title", title);
                         b.putInt("type", puzzleType);
-                        intent.putExtra("grid", array);
+                        b.putIntArray("dims", new int[]{dimX, dimY});
+                        b.putBoolean("scanned", false);
                         intent.putExtras(b);
                         startActivity(intent);
                         finish();
                     }
                 }
+            }
+        });
+
+
+        ImageButton cancel = findViewById(R.id.createcancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
@@ -134,13 +148,13 @@ public class CreatePuzzle extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         int index =  adapterView.getSelectedItemPosition();
 
-        if(index == 0){
+        if(index == 1){ //start at 0 if no placeholder spinner dropdown text
             puzzleType = index;
             System.out.println("crossword?");
         }
 
         //if puzzle is sudoku type then change dimensions to 9 x 9
-        if(index == 1){
+        if(index == 2){
             puzzleType = index;
             x.setText(String.valueOf(9));
             y.setText(String.valueOf(9));

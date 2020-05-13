@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.example.puzzlio.R;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 import org.opencv.android.Utils;
@@ -46,6 +47,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,11 +73,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     private String mCurrentPhotoPath;
     private ImageProcessing imageProcessing;
     private Bitmap bitmap, finalbmp;
+    private boolean editToggle = false;
 
     private FragmentPagerAdapter fragmentPagerAdapter;
     private ViewPager viewPager;
 
-    RecyclerViewAdapter adapter;
+    private RecyclerViewAdapter adapter;
+
+    private PuzzleList puzzleList;
+    private SocialTab socialTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,86 +90,64 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         viewPager = findViewById(R.id.viewPager);
         setPagerAdapter();
 
+        checkPermission();
+
+        puzzleList = new PuzzleList();
+        socialTab = new SocialTab();
+
         BottomAppBar appBar = findViewById(R.id.bottomAppBar);
         setSupportActionBar(appBar);
         appBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_coontainer, new SocialTab()).commit();
+                viewPager.setCurrentItem(0);
             }
         });
+
+
 
         appBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
+
             public boolean onMenuItemClick(MenuItem item) {
-                Fragment selectedFragment = null;
+
                 switch (item.getItemId()){
                     case(R.id.home):
-                        System.out.println("go on");
-                        selectedFragment = new PuzzleList();
+                        viewPager.setCurrentItem(1);
                         break;
-                    case(R.id.fab):
-                        selectedFragment = new PuzzleList();
-                        break;
+                    case(R.id.edit):
+                        editToggle = !editToggle;
+                        if(!editToggle && PuzzleList.puzzleList.size() > 0){
+                            findViewById(R.id.play).setVisibility(View.VISIBLE);
+                            findViewById(R.id.deletepuzzle).setVisibility(View.INVISIBLE);
+                        }else{
+                            findViewById(R.id.play).setVisibility(View.INVISIBLE);
+                            findViewById(R.id.deletepuzzle).setVisibility(View.VISIBLE);
+                        }
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_coontainer, selectedFragment).commit();
-
                 return true;
             }
         });
+
+
 
         FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PopupScanCreate.class);
+
                 startActivity(intent);
             }
         });
-//        Context mContext = getApplicationContext();
-//        DATA_PATH = mContext.getExternalFilesDir(null).toString() + "/Tess";
-//        DATA_PATH_LOCAL = getApplicationContext().getFilesDir() + "/tesseract";
-//        setContentView(R.layout.activity_main);
-////        setContentView(R.layout.capture);
-//
-//        if(OpenCVLoader.initDebug()){
-//            Toast.makeText(this, "loaded", Toast.LENGTH_SHORT).show();
-//        }else{
-//            Log.d("ok", "open cv fault");
-//        }
 
-//        textView = (TextView) this.findViewById(R.id.ocr_text);
-//        Button button = findViewById(R.id.scan_button);
-//        Button button1 = findViewById(R.id.test_button);
-//
-//        ImageView test = findViewById(R.id.imageView);
-//
-//        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.crosswordtest3).copy(Bitmap.Config.ARGB_8888, true);
-//
-//        imageProcessing = new ImageProcessing(this);
-//        imageProcessing.setBitmap(bitmap);
-//
-//        imageProcessing.img();
-//
-//
-//        button1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                test.setImageBitmap(bitmap);
-//                test.setImageBitmap(finalbmp);
-////                String res = getText(finalbmp);
-////                textView.setText(res);
-//            }
-//        });
+    }
 
-
-        checkPermission();
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                checkPermission();
-//                dispatchTakePictureIntent();
-//            }
-//        });
+    private void setPagerAdapter(){
+        fragmentPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(fragmentPagerAdapter);
+        viewPager.setCurrentItem(1);
+        TabLayout tabLayout= findViewById(R.id.slidertabs);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -174,21 +158,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     }
 
 
-    private void setPagerAdapter(){
-        fragmentPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(fragmentPagerAdapter);
-    }
-
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-    }
-
-
-    public void setBitmaps(Mat m){
-        finalbmp = Bitmap.createBitmap(m.cols(), m.rows(), Bitmap.Config.ARGB_8888);
-
-        Utils.matToBitmap(m, finalbmp);
     }
 
 
@@ -240,112 +212,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         return image;
     }
 
+//    private void startOCR(Uri imageUri){
+//        try{
+//            BitmapFactory.Options options = new BitmapFactory.Options();
+//            options.inJustDecodeBounds = false;
+//            options.inSampleSize = 7;
+//            Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, options);
+//            String result = this.getText(bitmap);
+//            textView.setText(result);
+//        }catch (Exception e){
+//            Log.e(TAG, e.getMessage());
+//        }
+//    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1024) {
-            if (resultCode == Activity.RESULT_OK) {
-                prepareTessData();
-                startOCR(outputFileDir);
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                Toast.makeText(getApplicationContext(), "Result canceled.", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "Activity result failed.", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    public void writeMats(List<Mat> mats) {
-        Bitmap bmp;
-        List<Bitmap> bmpList = new ArrayList<>();
-        for (int e = 0; e < mats.size(); e++) {
-            try {
-                bmp = Bitmap.createBitmap(mats.get(e).cols(), mats.get(e).rows(), Bitmap.Config.ARGB_8888);
-                Utils.matToBitmap(mats.get(e), bmp);
-                bmpList.add(bmp);
-                System.out.println("writing bitmap to sd card");
-            } catch (CvException o) {
-                o.printStackTrace();
-            }
-            mats.get(e).release();
-        }
-
-        for (int i = 0; i < bmpList.size(); i++) {
-            File sd = new File(getExternalFilesDir("/grids").toString() + "/" + i + ".png");
-            try {
-                sd.createNewFile();
-                FileOutputStream out = new FileOutputStream(sd);
-                bmpList.get(i).compress(Bitmap.CompressFormat.PNG, 100, out);
-                out.flush();
-                out.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void prepareTessData(){
-        try{
-            File dir = getExternalFilesDir(TESS_DATA);
-            if(!dir.exists()){
-                if (!dir.mkdir()) {
-                    Toast.makeText(getApplicationContext(), "The folder " + dir.getPath() + "was not created", Toast.LENGTH_SHORT).show();
-                }
-            }
-            String fileList[] = getAssets().list("");
-            for(String fileName : fileList){
-                String pathToDataFile = dir + "/" + fileName;
-                if(!(new File(pathToDataFile)).exists()){
-                    InputStream in = getAssets().open(fileName);
-                    OutputStream out = new FileOutputStream(pathToDataFile);
-                    byte [] buff = new byte[1024];
-                    int len ;
-                    while(( len = in.read(buff)) > 0){
-                        out.write(buff,0,len);
-                    }
-                    in.close();
-                    out.close();
-                }
-            }
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-        }
-    }
-
-    private void startOCR(Uri imageUri){
-        try{
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = false;
-            options.inSampleSize = 7;
-            Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, options);
-            String result = this.getText(bitmap);
-            textView.setText(result);
-        }catch (Exception e){
-            Log.e(TAG, e.getMessage());
-        }
-    }
-
-    private String getText(Bitmap bitmap){
-        try{
-            tessBaseAPI = new TessBaseAPI();
-        }catch (Exception e){
-            Log.e(TAG, e.getMessage());
-        }
-        String dataPath = getExternalFilesDir("/").getPath() + "/";
-        tessBaseAPI.init(dataPath, "eng");
-        tessBaseAPI.setImage(bitmap);
-        String retStr = "No result";
-        try{
-            retStr = tessBaseAPI.getUTF8Text();
-        }catch (Exception e){
-            Log.e(TAG, e.getMessage());
-        }
-        tessBaseAPI.end();
-        return retStr;
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -366,9 +245,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 }else{
                     Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
                 }
-                return;
         }
     }
+
 
     private Mat processNoisy(Mat grayMat) {
 //        Mat element1 = getStructuringElement(MORPH_RECT, new Size(2, 2), new Point(1, 1));
@@ -390,4 +269,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
     }
+
+    public Fragment getPuzzleList() {
+        return puzzleList;
+    }
+
+    public void setPuzzleList(PuzzleList puzzleList) {
+        this.puzzleList = puzzleList;
+    }
+
+
 }

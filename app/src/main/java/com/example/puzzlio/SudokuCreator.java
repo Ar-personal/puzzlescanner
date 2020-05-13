@@ -9,6 +9,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -28,7 +29,7 @@ import java.lang.reflect.Array;
 
 public class SudokuCreator extends AppCompatActivity implements Serializable{
 
-    private Integer[][] dims;
+    private int[] dims;
     private Button[][] gridButtons;
     private ToggleButton toggleButton;
     private boolean locked;
@@ -37,6 +38,7 @@ public class SudokuCreator extends AppCompatActivity implements Serializable{
     private TextView puzzleTitle;
     private Integer[][] arrayLocked, arrayBlack;
     private String[][] arrayValues;
+    private boolean scanned;
 
 
     @Override
@@ -47,11 +49,20 @@ public class SudokuCreator extends AppCompatActivity implements Serializable{
         Bundle extras = getIntent().getExtras();
         title = extras.getString("title");
         puzzleType = extras.getInt("type");
-        dims =  (Integer[][]) extras.getSerializable("grid");
+        dims = extras.getIntArray("dims");
+        scanned = extras.getBoolean("scanned");
 
-        gridButtons = new Button[dims.length][dims.length];
+        gridButtons = new Button[dims[0]][dims[1]];
 
-        //terrible code how on earth do u initlaise 2d array with another 2d array
+
+        //use nested for loop
+        arrayLocked = new Integer[dims[0]][dims[1]];
+
+        //if the puzzle was scanned in then creating a new object here will lose the scanned data
+        if(!scanned) {
+            arrayValues = new String[dims[0]][dims[1]];
+        }
+
 
 
         puzzleTitle = findViewById(R.id.puzzleTitle);
@@ -152,11 +163,11 @@ public class SudokuCreator extends AppCompatActivity implements Serializable{
                             builder.show();
                         }else{
                             gridButtons[j][k].setBackground(ContextCompat.getDrawable(SudokuCreator.this, R.drawable.ic_lock_outline_red_30dp));
+                            arrayLocked[j][k] = 10;
                             Toast.makeText(SudokuCreator.this, "Unlock to edit", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
 
                 System.out.println(gridButtons[x][y].getText());
 
@@ -169,20 +180,33 @@ public class SudokuCreator extends AppCompatActivity implements Serializable{
 
         }
 
-        prepareArrays(gridButtons);
+        if(scanned){
+            arrayValues = (String[][]) extras.get("valuesScanned");
+
+            for(int i = 0; i < dims[1]; i++){
+                for(int j = 0; j < dims[0]; j++){
+                    gridButtons[j][i].setText(arrayValues[i][j]);
+                }
+            }
+        }
+
+
 
         Button createButton = findViewById(R.id.createsudoku);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                prepareArrays(gridButtons);
+
                 Intent intent = new Intent(SudokuCreator.this, Puzzle.class);
 
                 intent.putExtra("name", title);
                 intent.putExtra("type", puzzleType);
-
                 intent.putExtra("gridValues", arrayValues);
                 intent.putExtra("gridLocked", arrayLocked);
+                intent.putExtra("dims", dims);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -190,23 +214,28 @@ public class SudokuCreator extends AppCompatActivity implements Serializable{
     }
 
     private void prepareArrays(Button[][] b) {
-         arrayValues = new String[dims.length][dims.length];
-         arrayLocked = dims;
-         arrayBlack = dims;
+
 
         for(int i = 0; i < b.length; i++){
             for(int j = 0; j < b[i].length; j++){
+
+
                 CharSequence v1 = b[i][j].getText();
                 if(v1.toString() != "" || v1 != null) {
-                    arrayValues[i][j] == String.valueOf(v1);
+                    arrayValues[i][j] = String.valueOf(v1);
                 }
-
-                if(b[i][j].getBackground() == ContextCompat.getDrawable(SudokuCreator.this, R.drawable.ic_lock_outline_red_30dp)){
-                    arrayLocked[i][j] = -1;
-                }
-
 
             }
+        }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

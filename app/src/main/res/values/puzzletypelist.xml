@@ -3,7 +3,8 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <string-array name="items">
-        <item>Crossword</item>
-        <item>Soduku</item>
+        <item>Select Puzzle</item>
+        <item>Crossword (not added)</item>
+        <item>Sudoku</item>
     </string-array>
 </resources>
